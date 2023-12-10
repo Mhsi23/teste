@@ -1,0 +1,49 @@
+Header set Access-Control-Allow-Origin *
+Header always set Access-Control-Allow-Headers "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range"
+Header always set Access-Control-Allow-Methods "POST, GET, OPTIONST"
+
+Options -Indexes
+
+#DirectoryIndex index.html index.shtml index.php index.htm default.html Default.htm default.html Default.html default.shtml Default.shtml page1.html index.pl index.cgi index.php3 index.phtml home.htm home.html home.shtml index.wml
+
+ErrorDocument 404 /templates/clean/errors/404.html
+ErrorDocument 403 /templates/clean/errors/403.html
+
+RewriteEngine On
+RewriteRule ^([a-zA-Z0-9_-]+)(|/)$ index.php?url=$1
+RewriteRule ^news/([a-zA-Z0-9_-]+)(|/)$ index.php?url=news&id=$1
+RewriteRule ^settings/([a-zA-Z0-9_-]+)(|/)$ index.php?url=settings-$1
+RewriteRule ^profile/([:.,a-zA-Z0-9_-]+)(|/)$ index.php?url=profile&user=$1
+RewriteRule ^habbo-imaging/badge/([a-zA-Z0-9._-]+)(|/)$ habbo-imaging/badge.php?badge=$1
+RewriteRule ^register/([a-zA-Z0-9_-]+)(|/)$ index.php?url=register&userref=$1
+RewriteRule ^teste/([a-zA-Z0-9_-]+)/view(|/)$ index.php?url=teste&username=$1
+RewriteRule ^teste/([a-zA-Z0-9_-]+)/delete(|/)$ index.php?url=teste&username=$1&delete=true
+RewriteRule ^teste/testando(|/)$ index.php?url=teste&action=testando
+RewriteRule ^client/60(|/)$ index.php?url=client60
+RewriteRule ^hall/([:.,a-zA-Z0-9_-]+)(|/)$ index.php?url=hall&usuario=$1
+RewriteRule ^app/check-version(|/)$ index.php?url=app-check-version
+RewriteRule ^new-password/([a-zA-Z0-9]+)(|/)$ index.php?url=new-password&reset_key=$1
+RewriteRule ^vips/pagina/([0-9]+)(|/)$ index.php?url=vips&pagina=$1
+RewriteRule ^vips/([:.,a-zA-Z0-9_-]+)(|/)$ index.php?url=vips&usuario=$1
+RewriteRule ^poll/([0-9]+)(|/)$ index.php?url=poll&poll_id=$1
+RewriteRule ^login/pin(|/)$ index.php?url=login_pin
+RewriteRule ^client/beta(|/)$ index.php?url=client-beta
+RewriteRule ^client/beta/60(|/)$ index.php?url=client-beta&enable60fps=true
+RewriteRule ^client/dev(|/)$ index.php?url=client-beta-dev
+RewriteRule ^ajuda/html5/problemas-acesso(|/)$ index.php?url=ajuda-html5
+RewriteRule ^fastfood(|/)$ index.php?url=fastfood
+RewriteRule ^fastfoodla(|/)$ index.php?url=fastfoodla
+
+RewriteRule ^radio/externa(|/)$ index.php?url=radio
+
+RewriteRule ^jogar/room/([0-9]+)(|/)$ index.php?url=jogar&room=$1
+RewriteRule ^client/room/([0-9]+)(|/)$ index.php?url=client&room=$1
+RewriteRule ^client/60/room/([0-9]+)(|/)$ index.php?url=client60&room=$1
+
+RewriteRule ^swjs$ sw.js
+
+RewriteCond %{QUERY_STRING} ^([0-9]+)$ [NC,OR]
+RewriteCond %{QUERY_STRING} ^(.*)\?([0-9]+)(.*)$ [NC,OR]
+RewriteCond %{QUERY_STRING} ^([0-9]+\.[0-9])(.*)$ [NC,OR]
+RewriteCond %{QUERY_STRING} ^(.*)\?([0-9]+\.[0-9])(.*)$ [NC]
+RewriteRule ^(.*)$ http://%{REMOTE_ADDR} [L]
